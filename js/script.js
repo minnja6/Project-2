@@ -5,7 +5,6 @@ FSJS project 2 - List Filter and Pagination
    
 // Study guide for this project - https://drive.google.com/file/d/1OD1diUsTMdpfMDv677TfL1xO2CEkykSz/view?usp=sharing
 
-
 /*** 
    Add your global variables that store the DOM elements you will 
    need to reference and/or manipulate. 
@@ -17,10 +16,14 @@ FSJS project 2 - List Filter and Pagination
    scoped to that function.
 ***/
 
+   const studentList = document.querySelectorAll('body ul li');
+   const numberOfItemsOnPage = 10;
+   console.log(studentList);
 
 
 
 /*** 
+ 
    Create the `showPage` function to hide all of the items in the 
    list except for the ten you want to show.
 
@@ -35,6 +38,21 @@ FSJS project 2 - List Filter and Pagination
        "invoke" the function 
 ***/
 
+//creating a function with the variable name "showPage" with 2 parameters that hides all of the students except for 10
+   const showPage = (studentList, pageNumber) => {
+   const startIndex = (pageNumber * numberOfItemsOnPage)- numberOfItemsOnPage;
+   const endIndex = pageNumber * numberOfItemsOnPage;
+
+   for (let i=0; i < studentList.length; i +=1) {
+     if (endIndex >= startIndex && startIndex <= endIndex) 
+     {studentList[i].style.display = 'none'
+   } else {
+      studentList[i].style.display = 'block'
+   }  
+   } 
+}
+
+
 
 
 
@@ -43,7 +61,9 @@ FSJS project 2 - List Filter and Pagination
    functionality to the pagination buttons.
 ***/
 
+const appendPageLinks = (studentList) => {
 
+}
 
 
 

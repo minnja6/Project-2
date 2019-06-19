@@ -19,8 +19,7 @@ FSJS project 2 - List Filter and Pagination
    const studentList = document.querySelectorAll('body ul li');
    const numberOfItemsOnPage = 10;
    console.log(studentList);
-
-
+  
 
 /*** 
  
@@ -39,31 +38,45 @@ FSJS project 2 - List Filter and Pagination
 ***/
 
 //creating a function with the variable name "showPage" with 2 parameters that hides all of the students except for 10
-   const showPage = (studentList, pageNumber) => {
-   const startIndex = (pageNumber * numberOfItemsOnPage)- numberOfItemsOnPage;
-   const endIndex = pageNumber * numberOfItemsOnPage;
+const showPage = (studentList, page) => {
+   const startIndex = (page * numberOfItemsOnPage) - numberOfItemsOnPage;
+   const endIndex = page * numberOfItemsOnPage;
 
-   for (let i=0; i < studentList.length; i +=1) {
-     if (endIndex >= startIndex && startIndex <= endIndex) 
-     {studentList[i].style.display = 'none'
-   } else {
-      studentList[i].style.display = 'block'
-   }  
+   for ( i=0; i < studentList.length; i +=1) {
+      if (i >= startIndex && i < endIndex) {
+         studentList[i].style.display = 'block'
+      } else {
+         studentList[i].style.display = 'none'
+      }  
    } 
 }
 
+showPage(studentList, 1);
 
-
-
+const getNumberOfPages =(itemsPerPage, list)=>{
+   return Math.ceil(list.length/itemsPerPage);
+};
 
 /*** 
    Create the `appendPageLinks function` to generate, append, and add 
    functionality to the pagination buttons.
 ***/
 
-const appendPageLinks = (studentList) => {
+const appendPageLinks = (studentList) => { 
+   let div = document.createElement('div').className(pagination);
+   let ul = document.createElement('ul');
+   div.appendChild(ul);
+   document.querySelector('div.page').appendChild(div); 
+   
+   let numberOfPages = getNumberOfPages(numberOfItemsOnPage, studentList);
+   for (i=1; i <= numberOfPages; i++){ 
+      let li = document.createElement('li');
+      // create a list item with an anchor
+      // append list item to the list
+   } 
+     console.log(listOfStudents);
+} 
 
-}
 
 
 

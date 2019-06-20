@@ -63,19 +63,36 @@ const getNumberOfPages =(itemsPerPage, list)=>{
 ***/
 
 const appendPageLinks = (studentList) => { 
-   let div = document.createElement('div').className(pagination);
+
+   let div = document.createElement('div');
    let ul = document.createElement('ul');
+   let page = document.querySelector('.page');
+   div.setAttribute('class', 'pagination');
+   
+   page.appendChild(div); 
    div.appendChild(ul);
-   document.querySelector('div.page').appendChild(div); 
    
    let numberOfPages = getNumberOfPages(numberOfItemsOnPage, studentList);
+   
+// create a list item with an anchor
+// append list item to the list
    for (i=1; i <= numberOfPages; i++){ 
-      let li = document.createElement('li');
-      // create a list item with an anchor
-      // append list item to the list
-   } 
-     console.log(listOfStudents);
+   let li = document.createElement('li');
+   let a = document.createElement('a');
+   ul.appendChild(li);
+   li.appendChild(a);
+   .setAttribute( );
+   // a.innerHTML = "#";
+   a.innerHTML = i;
+
+   div.addEventListener('click', () => {
+
+   });
+      
+  }
 } 
+   showPage(studentList, 2);
+  appendPageLinks(studentList);
 
 
 

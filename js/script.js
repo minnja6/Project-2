@@ -1,68 +1,30 @@
-//creating my two global variables that will be 
-
-const studentList = document.querySelectorAll('body ul li');
-const numberOfItemsOnPage = 10;
-console.log(studentList);
-
-
-//creating a function with the variable name "showPage" with 2 parameters that hides all of the students except for 10
-const showPage = (studentList, page) => {
-const startIndex = (page * numberOfItemsOnPage) - numberOfItemsOnPage;
-const endIndex = page * numberOfItemsOnPage;
-
-for ( i=0; i < studentList.length; i +=1) {
-   if (i >= startIndex && i < endIndex) {
-      studentList[i].style.display = 'block'
-   } else {
-      studentList[i].style.display = 'none'
-   }  
-} 
-}
-
-showPage(studentList, 1);
-
-const getNumberOfPages =(itemsPerPage, list)=>{
-return Math.ceil(list.length/itemsPerPage);
-};
-
-
-// Creating the "appendPageLinks function" to generate, append, and add 
-// functionality to the pagination buttons.
-
-const appendPageLinks = (studentList) => { 
-
-let div = document.createElement('div');
-let ul = document.createElement('ul');
-let page = document.querySelector('.page');
-div.setAttribute('class', 'pagination');
-
-page.appendChild(div); 
-div.appendChild(ul); 
-
-let numberOfPages = getNumberOfPages(numberOfItemsOnPage, studentList);
-
-// creating a list item with an anchor
-// appending the list item to the list
-for (i=1; i <= numberOfPages; i++){ 
-let li = document.createElement('li');
-let a = document.createElement('a');
-ul.appendChild(li);
-li.appendChild(a);
-a.setAttribute('href', '#');
-a.innerHTML = i;
-
-//creating the event listener to listen for a "click" to change the page/removing the active class in my for loop, adding the active class back outside of the for loop
-a.addEventListener('click', (event) => {
-for (i=0; i < a.length; i++) {
-let button = event.target.innerHTML;
-showPage(page, button);
-page[i].classList.removeAttribute("active");
-showPage(studentList);
-}
-event.target.setAttribute = "active"; 
-});
-   
-}
-} 
-showPage(studentList, 2);
-appendPageLinks(studentList);
+//creating two global variables, one to store the student 
+//list item elements in the student list and one to store the number of items to show on each page
+   const studentList = document.getElementsByClassName('student-item');
+   const itemsOnPage = 10;
+   console.log(studentList);
+//creating a function with two parameters, page and list to hide all students but 10 per page
+   const showPage = (list, page) => {
+      startIndex = (page * itemsOnPage) - itemsOnPage;
+      endIndex = page * itemsOnPage;
+      for(i = 0; i < studentList.length; i +=1){    //looping over the list parameter
+         if (i >= startIndex && i < endIndex){      //if statement to show only 10 items 
+            studentList[i].style.display = 'block'
+         } else {                                   //else statement to hide all items other than what I want to show
+            studentList[i].style.display = 'none'
+         }
+      }
+   }
+   showPage(studentList, 1);
+//function to get the number of pages and round them up to a whole number
+   const getNumberOfPages =(itemsPerPage, list)=>{
+   return Math.ceil(list.length/itemsPerPage);
+   };
+//creating a function that creates and appends functioning pagination links 
+   const appendPageLinks = (list) => {
+      let div = document.createElement('div');
+      div.setAttribute('class', 'pagination');
+      page.appendChild(div);
+      let ul = document.createElement('ul');
+      div.appendChild(ul);
+   }

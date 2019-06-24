@@ -1,62 +1,69 @@
-//creating my two global variables that will be 
+//creating my global variable that will be used to store the student list item elements in the student list
+const studentList = document.querySelectorAll("body ul li");
+//creating a global variable to store the number of items per page i want to show
+   const itemsPerPage = 10;
+console.log(studentList);
 
-const list = document.getElementsByClassName("student-item");
-const itemsPerPage = 10;
-console.log(list);
 
-
-//creating a function with the variable name "showPage" with 2 parameters that hides all of the students except for 10
-const showPage = (list, page) => {
-const startIndex = page * itemsPerPage - itemsPerPage;
-const endIndex = page * itemsPerPage -1;
-
-for ( i=0; i < list.length; i ++) {
-   if (i >= startIndex && i < endIndex) {
-      list[i].style.display = 'block'
-   } else {
-      list[i].style.display = 'none'
+//creating a "showPage" function containing two parameters 
+   const showPage = (studentList, page) => {
+//two variables that hold the start index and end index of the list items to be displayed
+   const startIndex = (page * itemsPerPage) - itemsPerPage;
+   const endIndex = (page * itemsPerPage);
+//looping over the list parameter 
+   for ( i = 0; i < studentList.length; i +=1) {
+      if ( i >= startIndex && i < endIndex) {
+          studentList[i].style.display = 'block';
+      } else {
+         studentList[i].style.display = 'none';
    }  
-} 
-};
-
-showPage(list, 1);
-
-const numPages =(itemsPerPage, list)=>{
-return Math.ceil(list.length/itemsPerPage);
-};
-
+  } 
+ };
+showPage(studentList, 1);
 
 // Creating the "appendPageLinks function" to generate, append, and add 
 // functionality to the pagination buttons.
 
-const appendPageLinks = (list) => { 
+         const appendPageLinks = (studentList) => { 
+      //determining how many pages are needed      
+      const getNumberOfPages =(itemsPerPage, list)=>{
+         return Math.ceil(list.length/itemsPerPage);
+         };
+            
+      //creating a div element with and giving it the class name of pagination
+         let div = document.createElement('div');
+         div.className = "pagination";
+      //creating the ul element and append the page to .page   
+      let page = document.querySelector('.page');
+      page.appendChild(div);
+      //adding a ul to the "pagination" div to store the pagination links 
+      let ul = document.createElement('ul');
+      div.appendChild(ul); 
 
-let paginationDiv = document.createElement('div');
-let paginationLinks = document.createElement('ul');
-let pageDiv = document.querySelector('.page');
-paginationDiv.setAttribute('class', 'pagination');
+      // creating a list item with an anchor
+      // appending the list item to the list
+      for (i=1; i < itemsPerPage; i++){ 
+         let li = document.createElement('li');
+         let a = document.createElement('a');
+         ul.appendChild(li);
+      li.appendChild(a);
+      a.setAttribute('href', '#');
+      a.textContent = i;
 
-pageDiv.appendChild(paginationDiv); 
-paginationDiv.appendChild(paginationLinks); 
-
-// creating a list item with an anchor
-// appending the list item to the list
-for (i=1; i < numPages + 1; i++){ 
-let li = document.createElement('li');
-let a = document.createElement('a');
-paginationLinks.appendChild(li);
-li.appendChild(a);
-a.setAttribute('href', '#');
-a.textContent = i;
-
-paginationLinks.firstElementChild.firstElementChild.className = "active";
-//creating the event listener to listen for a "click" to change the page/removing the active class in my for loop, adding the active class back outside of the for loop
-a.addEventListener('click', (event) => {
-page = parseInt(e.target.textContent);
-showPage(list, page);
-let a = document.querySelectorAll('a');
-for(let i = 0; i < a.length; i++) {
-   a[i].className = "";
-}
-event.target.className = "active";
-});
+      if (i === 0) {
+         a.className = 'active';
+      }
+      //creating the event listener to listen for a "click" to change the page/removing the active class in my for loop, adding the active class back outside of the for loop
+      a.addEventListener('click', (e) => {
+      let a = document.querySelectorAll('a');
+      for(i = 0; i < a.length; i++) {
+         a.className = '';
+      }
+      let active = e.target.textContent;
+      a.className = 'active';
+      showPage(studentList, active);
+      });
+      }
+      };
+      showPage(studentList, 1);
+      appendPageLinks(studentList);

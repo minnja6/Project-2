@@ -8,10 +8,10 @@ console.log(studentList);
 //creating a "showPage" function containing two parameters 
    const showPage = (studentList, page) => {
 //two variables that hold the start index and end index of the list items to be displayed
-   const startIndex = (page * itemsPerPage) - itemsPerPage;
-   const endIndex = (page * itemsPerPage);
+   const startIndex = page * itemsPerPage - itemsPerPage;
+   const endIndex = page * itemsPerPage;
 //looping over the list parameter 
-   for ( i = 0; i < studentList.length; i +=1) {
+   for (let i = 0; i < studentList.length; i ++) {
       if ( i >= startIndex && i < endIndex) {
           studentList[i].style.display = 'block';
       } else {
@@ -26,10 +26,7 @@ showPage(studentList, 1);
 
          const appendPageLinks = (studentList) => { 
       //determining how many pages are needed      
-      const getNumberOfPages =(itemsPerPage, list)=>{
-         return Math.ceil(list.length/itemsPerPage);
-         };
-            
+         let getNumberOfPages = Math.ceil(studentList.length / itemsPerPage);
       //creating a div element with and giving it the class name of pagination
          let div = document.createElement('div');
          div.className = "pagination";
@@ -42,25 +39,25 @@ showPage(studentList, 1);
 
       // creating a list item with an anchor
       // appending the list item to the list
-      for (i=1; i < itemsPerPage; i++){ 
+      for (let j = 1; j <= getNumberOfPages; j++){ 
          let li = document.createElement('li');
          let a = document.createElement('a');
          ul.appendChild(li);
       li.appendChild(a);
       a.setAttribute('href', '#');
-      a.textContent = i;
+      a.textContent = j;
 
-      if (i === 0) {
+      if (j === 0) {
          a.className = 'active';
       }
       //creating the event listener to listen for a "click" to change the page/removing the active class in my for loop, adding the active class back outside of the for loop
       a.addEventListener('click', (e) => {
       let a = document.querySelectorAll('a');
-      for(i = 0; i < a.length; i++) {
+      for(let k = 0; k < a.length; k++) {
          a.className = '';
       }
       let active = e.target.textContent;
-      a.className = 'active';
+     
       showPage(studentList, active);
       });
       }
